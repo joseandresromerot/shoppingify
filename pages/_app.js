@@ -1,10 +1,10 @@
-import '@/styles/globals.css'
-import RootLayout from '@/components/layout';
+import '@/styles/globals.css';
+import { SessionProvider } from "next-auth/react";
 
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps: { session, ...pageProps } }) {
   return (
-    <RootLayout>
+    <SessionProvider session={session} refetchInterval={5 * 60}>
       <Component {...pageProps} />
-    </RootLayout>
+    </SessionProvider>
   );
 }

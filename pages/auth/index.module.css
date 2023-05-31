@@ -1,0 +1,26 @@
+.mainContainer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.formContainer {
+  max-width: 500px;
+  width: 80%;
+  background-color: rgb(229, 229, 229);
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  padding: 20px 10px;
+}
+
+.formContainer form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+}

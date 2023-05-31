@@ -19,3 +19,10 @@
   justify-content: center;
   gap: 30px;
 }
+
+.logoutButton {
+  height: 45px;
+  background: transparent;
+  border: 0;
+  color: rgb(140, 0, 0)
+}
