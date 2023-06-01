@@ -11,6 +11,7 @@ import logo from '../../public/logo.svg';
 import ShoppingCart from './shopping-cart';
 import IconButton from '../ui/button/icon-button';
 import { signOut } from 'next-auth/react';
+import { useRouter } from 'next/router';
 
 const PAGES = [
   {
@@ -31,9 +32,16 @@ const PAGES = [
 ];
 
 const Navbar = () => {
+  const router = useRouter();
+
+  async function handleLogout() {
+    await signOut();
+    router.replace("/auth");
+  }
+
   return (
     <nav className={classes.toolbar}>
-      <Image src={logo} />
+      <Image src={logo} alt="Shoppingify Logo" />
       <ul>
         {PAGES.map(page => (
           <NavItem key={page.url} url={page.url} name={page.name} icon={page.icon} />
@@ -42,9 +50,7 @@ const Navbar = () => {
           icon={faRightFromBracket}
           fontSize={20}
           buttonClassName={classes.logoutButton}
-          onClick={() => {
-            signOut();
-          }}
+          onClick={handleLogout}
         />
       </ul>
       <ShoppingCart badgeNumber={3}/>

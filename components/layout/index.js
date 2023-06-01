@@ -1,18 +1,16 @@
 import classes from './index.module.css';
 import Navbar from './navbar';
-import { Inter } from 'next/font/google';
-// import Font Awesome CSS
 import "@fortawesome/fontawesome-svg-core/styles.css"; 
-import { config } from "@fortawesome/fontawesome-svg-core";
-// Tell Font Awesome to skip adding the CSS automatically 
-// since it's already imported above
-config.autoAddCss = false; 
+import { Quicksand } from 'next/font/google';
 
-const inter = Inter({ subsets: ['latin'] });
+const quicksand = Quicksand({
+  weight: ['300', '400', '500', '600', '700'],
+  subsets: ['latin'],
+});
 
 export default function RootLayout({ children }) {
   return (
-    <div className={`${classes.mainContainer} ${inter.className}`}>
+    <div className={`${classes.mainContainer} ${quicksand.className}`}>
       <Navbar />
       {children}
     </div>

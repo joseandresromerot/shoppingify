@@ -1,7 +1,14 @@
 import classes from './index.module.css';
 import { useRef } from 'react';
-import { signIn } from 'next-auth/react';
+import { signIn, getSession } from 'next-auth/react';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { Quicksand } from 'next/font/google';
+
+const quicksand = Quicksand({
+  weight: ['300', '400', '500', '600', '700'],
+  subsets: ['latin'],
+});
 
 async function createUser(username, password, fullname) {
   const response = await fetch('/api/auth/signup', {
@@ -27,6 +34,8 @@ const AuthPage = () => {
   const passwordRef = useRef();
   const fullnameRef = useRef();
 
+  const router = useRouter();
+
   async function onSubmit(event) {
     event.preventDefault();
 
@@ -42,8 +51,12 @@ const AuthPage = () => {
         username,
         password
       });
-  
+
       console.info('login result', result);
+
+      if (!result.error) {
+        router.replace("/");
+      }
     } else {
       try {
         const result = await createUser(username, password, fullname);
@@ -55,7 +68,7 @@ const AuthPage = () => {
   }
 
   return (
-    <div className={classes.mainContainer}>
+    <div className={`${classes.mainContainer} ${quicksand.className}`}>
       <div className={classes.formContainer}>
         <form onSubmit={onSubmit}>
           <h2>{isLoginPage ? "Login" : "Create Account"}</h2>
@@ -75,6 +88,23 @@ const AuthPage = () => {
       </div>
     </div>
   );
+}
+
+export async function getServerSideProps(context) {
+  const session = await getSession({ req: context.req });
+
+  if (session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false
+      }
+    };
+  }
+
+  return {
+    props: { session: null }
+  };
 }
 
 export default AuthPage;

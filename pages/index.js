@@ -1,22 +1,18 @@
-import AuthPage from "./auth";
-import ItemsPage from "./items";
-import { useSession } from "next-auth/react"
+import RootLayout from "@/components/layout";
+import { getSession } from "next-auth/react";
+import { redirectUnauthenticated } from "@/lib/auth";
 
-const HomePage = () => {
-  const session = useSession();
-  console.info('session', session);
-
-  if (session.status === "loading") {
-    return <p>Loading...</p>;
-  }
-
-  if (session.status === "authenticated") {
-    return <ItemsPage />;
-  }
-
+const ItemsPage = () => {
   return (
-    <AuthPage />
+    <RootLayout>
+      <p>ITEMS PAGE</p>
+    </RootLayout>
   );
 };
 
-export default HomePage;
+export async function getServerSideProps(context) {
+  const result = await redirectUnauthenticated(getSession, context);
+  return result;
+}
+
+export default ItemsPage;
