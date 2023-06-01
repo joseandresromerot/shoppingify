@@ -20,7 +20,7 @@ export default NextAuth({
         const users = userResult.rows;
 
         if (users.length === 0) {
-          throw new Error("No user found");
+          throw new Error("User is not registered");
         }
 
         const user = users[0];
@@ -28,7 +28,7 @@ export default NextAuth({
         const isValid = await verifyPassword(credentials.password, user.password);
 
         if (!isValid) {
-          throw new Error("Could not log in");
+          throw new Error("Enter a valid username and password");
         }
 
         return {

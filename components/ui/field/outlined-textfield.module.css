@@ -1,0 +1,30 @@
+.container {
+  position: relative;
+  border: 2px solid #BDBDBD;
+  border-radius: 12px;
+  background: transparent;
+  height: 60px;;
+}
+
+.input {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  background: transparent;
+  border: 0;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 18px;
+  color: #34333A;
+}
+
+.input::placeholder {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  color: #BDBDBD;
+}

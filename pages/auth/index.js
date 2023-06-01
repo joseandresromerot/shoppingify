@@ -1,9 +1,13 @@
 import classes from './index.module.css';
-import { useRef } from 'react';
 import { signIn, getSession } from 'next-auth/react';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
+import { showMessage, hideMessage, showLoading } from '@/store/actions/messages';
 import { Quicksand } from 'next/font/google';
+import OutlinedTextfield from '@/components/ui/field/outlined-textfield';
+import RoundedButton from '@/components/ui/button/rounded-button';
+import TransparentButton from '@/components/ui/button/transparent-button';
 
 const quicksand = Quicksand({
   weight: ['300', '400', '500', '600', '700'],
@@ -30,22 +34,59 @@ async function createUser(username, password, fullname) {
 
 const AuthPage = () => {
   const [isLoginPage, setIsLoginPage] = useState(true);
-  const usernameRef = useRef();
-  const passwordRef = useRef();
-  const fullnameRef = useRef();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [fullname, setFullname] = useState("");
 
   const router = useRouter();
+  const dispatch = useDispatch();
 
   async function onSubmit(event) {
     event.preventDefault();
 
-    const username = usernameRef.current.value;
-    const password = passwordRef.current.value;
-    const fullname = !isLoginPage ? fullnameRef.current.value : "";
-
     //alert(`${username}:${password}:${fullname}`);
+    if (username.trim() === "") {
+      dispatch(showMessage(
+        "Enter your username",
+        "Ok",
+        () => {
+          dispatch(hideMessage());
+        },
+        null,
+        null
+      ));
+      return;
+    }
+
+    if (password.trim() === "") {
+      dispatch(showMessage(
+        "Enter your password",
+        "Ok",
+        () => {
+          dispatch(hideMessage());
+        },
+        null,
+        null
+      ));
+      return;
+    }
+
+    if (password.trim().length < 8) {
+      dispatch(showMessage(
+        "Password must have a minimum length of 8",
+        "Ok",
+        () => {
+          dispatch(hideMessage());
+        },
+        null,
+        null
+      ));
+      return;
+    }
 
     if (isLoginPage) {
+      dispatch(showLoading());
+
       const result = await signIn('credentials', {
         redirect: false,
         username,
@@ -55,11 +96,55 @@ const AuthPage = () => {
       console.info('login result', result);
 
       if (!result.error) {
+        dispatch(hideMessage());
         router.replace("/");
+      } else {
+        dispatch(hideMessage());
+        dispatch(showMessage(
+          result.error,
+          "Ok",
+          () => {
+            dispatch(hideMessage());
+          },
+          null,
+          null
+        ));
       }
     } else {
+      if (fullname.trim() === "") {
+        dispatch(showMessage(
+          "Enter your full name",
+          "Ok",
+          () => {
+            dispatch(hideMessage());
+          },
+          null,
+          null
+        ));
+        return;
+      }
+
       try {
+        dispatch(showLoading());
         const result = await createUser(username, password, fullname);
+        dispatch(hideMessage());
+
+        dispatch(showMessage(
+          result.message,
+          "Ok",
+          () => {
+            dispatch(hideMessage());
+          },
+          null,
+          null
+        ));
+
+        if (result.success === true) {
+          setUsername("");
+          setPassword("");
+          setFullname("");
+          setIsLoginPage(true);
+        }
         console.info(result);
       } catch(e) {
         console.info(e);
@@ -71,20 +156,15 @@ const AuthPage = () => {
     <div className={`${classes.mainContainer} ${quicksand.className}`}>
       <div className={classes.formContainer}>
         <form onSubmit={onSubmit}>
-          <h2>{isLoginPage ? "Login" : "Create Account"}</h2>
-          <label htmlFor='username'>Username</label>
-          <input id='username' type='text' ref={usernameRef}/>
-          <label htmlFor='password'>Password</label>
-          <input id='password' type='password' ref={passwordRef}/>
+          <div className={classes.title}>{isLoginPage ? "Login" : "Create Account"}</div>
+          <OutlinedTextfield type='text' placeholder="Username" value={username} onChange={e => setUsername(e.target.value)} />
+          <OutlinedTextfield type='password' placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
           {!isLoginPage &&
-            <>
-              <label htmlFor='fullname'>Full Name</label>
-              <input id='fullname' type='text' ref={fullnameRef}/>
-            </>
+              <OutlinedTextfield type='text' placeholder="Full Name" value={fullname} onChange={e => setFullname(e.target.value)} />
           }
-          <button>{isLoginPage ? "Login" : "Signup"}</button>
+          <RoundedButton className={classes.submitButton}>{isLoginPage ? "Login" : "Signup"}</RoundedButton>
         </form>
-        <button onClick={() => setIsLoginPage(!isLoginPage) }>{isLoginPage ? "Create Account" : "Back to Login"}</button>
+        <TransparentButton className={classes.secondaryButton} onClick={() => setIsLoginPage(!isLoginPage) }>{isLoginPage ? "Create Account" : "Back to Login"}</TransparentButton>
       </div>
     </div>
   );

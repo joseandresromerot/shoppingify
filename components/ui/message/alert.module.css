@@ -1,0 +1,57 @@
+.overlayPanel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 80%;
+  max-width: 500px;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 24px;
+}
+
+.message {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 30px;
+  color: #34333A;
+  margin-bottom: 25px;
+}
+
+.buttonsContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.primaryButton {
+  width: 87px;
+  background: #EB5757;
+  color: #fff;
+  height: 60px;
+}
+
+.secondaryButton {
+  width: 87px;
+  background: transparent;
+  border-radius: 12px;
+  border: 0;
+  color: #34333A;
+  height: 60px;
+}

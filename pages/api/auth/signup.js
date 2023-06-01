@@ -6,12 +6,14 @@ async function handler(req, res) {
   if (req.method !== "POST") {
     return;
   }
+
   const data = req.body;
 
-  const { username, password, fullname} = data;
+  const { username, password, fullname } = data;
 
   if (!username || !password || !fullname || password.trim().length < 8) {
     res.status(422).json({
+      success: false,
       message: "Invalid input"
     });
   }
@@ -23,7 +25,7 @@ async function handler(req, res) {
     );
 
     if (userResult.rowCount > 0) {
-      res.status(422).json({ message: "Username already taken" });
+      res.status(422).json({ success: false, message: "Username already taken" });
       return;
     }
 
@@ -34,10 +36,10 @@ async function handler(req, res) {
       [uuid(), username, hashedPassword, fullname]
     );
 
-    res.status(201).json({ message: "Created user" });
+    res.status(201).json({ success: true, message: "User created successfully! Please log in" });
   } catch ( error ) {
     console.log( error );
-    res.status(500).json({ message: error.toString() });
+    res.status(500).json({ success: false, message: error.toString() });
   }
 }
 
