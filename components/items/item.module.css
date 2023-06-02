@@ -1,0 +1,29 @@
+.item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  border: 0;
+  background: #FFFFFF;
+  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+  width: 200px;
+  padding: 17px;
+}
+
+.itemName {
+  flex: 1;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  color: #000000;
+}
+
+.plus {
+  width: 30px;
+  height: 100%;
+  background: transparent;
+  border: 0;
+  color: #C1C1C4;
+}
