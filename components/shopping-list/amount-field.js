@@ -1,33 +1,51 @@
 import classes from './amount-field.module.css';
-import { useState } from 'react';
 import IconButton from '../ui/button/icon-button';
 import { faTrashCan, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 
-const AmountField = ({ value, onClick, onRemove, onMinus, onPlus }) => {
-  const [editing, setEditing] = useState(false);
+const AmountField = ({
+  value,
+  onValueChange,
+  editing,
+  onEditingChange,
+  onRemove,
+  disabled
+}) => {
+  const handleEditingChange = () => {
+    if (!disabled) {
+      onEditingChange(!editing);
+    }
+  };
 
-  const handleClick = () => {
-    setEditing(!editing);
-    onClick();
+  const handleMinusClick = () => {
+    if (value > 1) {
+      onValueChange(value - 1);
+    }
+  };
+
+  const handlePlusClick = () => {
+    onValueChange(value + 1);
+  };
+
+  const handleRemoveClick = () => {
+    onRemove();
   };
 
   return (
     <div className={classes.fieldContainer} style={{ background: editing ? "#fff" : "transparent" }}>
-      {editing && <IconButton icon={faTrashCan} fontSize={13} className={classes.delete} onClick={onRemove} />}
-      {editing && <IconButton icon={faMinus} fontSize={18} className={classes.minusPlus} onClick={onMinus} />}
-      <button className={classes.amount} onClick={handleClick}>
+      {editing && <IconButton icon={faTrashCan} fontSize={13} className={classes.delete} onClick={handleRemoveClick} />}
+      {editing && <IconButton icon={faMinus} fontSize={18} className={classes.minusPlus} onClick={handleMinusClick} />}
+      <button className={classes.amount} onClick={handleEditingChange}>
         <span className={classes.amountText}>{value} pcs</span>
       </button>
-      {editing &&<IconButton icon={faPlus} fontSize={18} className={classes.minusPlus} onClick={onPlus} />}
+      {editing &&<IconButton icon={faPlus} fontSize={18} className={classes.minusPlus} onClick={handlePlusClick} />}
     </div>
   );
 }
 
 AmountField.defaultProps = {
-  onClick: () => {},
+  onEditingChange: () => {},
   onRemove: () => {},
-  onMinus: () => {},
-  onPlus: () => {}
+  onValueChange: () => {}
 };
 
 export default AmountField;

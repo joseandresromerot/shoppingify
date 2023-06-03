@@ -17,3 +17,12 @@ export const setActiveShoppingList = (activeShoppingList) => {
     }
   }
 }
+
+export const setAppMode = (appMode) => {
+  return {
+    type: Types.SET_APP_MODE,
+    payload: {
+      appMode
+    }
+  }
+}

@@ -1,6 +1,7 @@
 export const Types = {
   SET_ITEMS: "items/SET_ITEMS",
   SET_ACTIVE_SHOPPING_LIST: "items/SET_ACTIVE_SHOPPING_LIST",
+  SET_APP_MODE: "items/SET_APP_MODE",
 };
 
 export const APP_MODES = {
@@ -27,6 +28,11 @@ const itemsReducer = (state = initialState, action) => {
       return {
         ...state,
         activeShoppingList: action.payload.activeShoppingList
+      };
+    case Types.SET_APP_MODE:
+      return {
+        ...state,
+        appMode: action.payload.appMode
       };
 
     default:

@@ -13,3 +13,9 @@
   line-height: 22px;
   color: #000000;
 }
+
+.check {
+  width: 20px;
+  color: #F9A109;
+  margin-right: 10px;
+}

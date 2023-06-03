@@ -20,14 +20,20 @@ async function handler(req, res) {
       "ORDER BY sl.created_on DESC LIMIT 1"
     );
 
-    if (result.rowCount == 0) {
-      res.status(500).json({ success: false, message: "No active shopping list" });
-      return;
-    }
+    let activeShoppingList = { editing: false };
 
-    const activeShoppingList = {
-      ...result.rows[0]
-    };
+    /*if (result.rowCount == 0) {
+      //res.status(500).json({ success: false, message: "No active shopping list" });
+      res.status(200).json({ success: true, shoppingList: null});
+      return;
+    }*/
+
+    if (result.rowCount > 0) {
+        activeShoppingList = {
+          ...result.rows[0],
+          editing: false
+        };
+    }
 
     const itemsResult = await conn.query(
       "SELECT i.id, i.name, c.name as category, sli.checked, sli.amount " +
