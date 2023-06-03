@@ -32,6 +32,7 @@ export default NextAuth({
         }
 
         return {
+          id: user.id,
           username: user.username,
           fullname: user.fullname
         }

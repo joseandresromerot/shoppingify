@@ -1,0 +1,23 @@
+.titleContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 30px 30px 10px 30px;
+}
+
+.title {
+  flex: 1;
+  margin: 0;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 30px;
+  color: #34333A;
+}
+
+.edit {
+  width: 35px;
+  height: 30px;
+  background: transparent;
+  border: 0;
+}

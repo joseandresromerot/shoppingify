@@ -1,0 +1,12 @@
+.category {
+  margin: 20px 30px;
+}
+
+.categoryName {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  color: #828282;
+  margin-bottom: 20px;
+}

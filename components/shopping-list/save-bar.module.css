@@ -1,0 +1,35 @@
+.fieldContainer {
+  height: 130px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px 25px;
+  background-color: #fff;
+}
+
+div.fieldWrapper {
+  flex: 1;
+  height: 61px;
+  border: 2px solid #F9A109;
+  border-radius: 12px;
+  margin-right: -20px;
+}
+
+input.field::placeholder {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  color: #BDBDBD;
+}
+
+.save {
+  height: 61px;
+  width: 87px;
+  background: #F9A109;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  color: #FFFFFF;
+}

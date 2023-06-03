@@ -6,7 +6,7 @@ const Item = ({ name, onClick }) => {
   return (
     <div className={classes.item}>
       <div className={classes.itemName}>{name}</div>
-      <IconButton buttonClassName={classes.plus} icon={faPlus} fontSize={18} onClick={onClick} />
+      <IconButton className={classes.plus} icon={faPlus} fontSize={18} onClick={onClick} />
     </div>
   );
 }

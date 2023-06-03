@@ -8,15 +8,7 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import Category from "@/components/items/category";
 import { useDispatch, useSelector } from "react-redux";
 import { setItems } from "@/store/actions/items";
-
-const groupBy = (list, property) => {
-  return list.reduce((groups, item) => {
-    const group = (groups[item[property]] || []);
-    group.push(item);
-    groups[item[property]] = group;
-    return groups;
-  }, {});
-}
+import { groupBy } from "@/lib/utils";
 
 const ItemsPage = () => {
   const dispatch = useDispatch();
@@ -30,13 +22,13 @@ const ItemsPage = () => {
       const response = await fetch('/api/items', {
         method: "GET"
       });
-    
+
       const data = await response.json();
-    
+
       if (!response.ok) {
         throw new Error(data.message || "Errooooor!");
       }
-    
+
       return data;
     };
 

@@ -4,9 +4,7 @@
   align-items: stretch;
   justify-content: flex-start;
   padding: 30px 60px;
-  flex: 1;
   gap: 20px;
-  margin-left: 60px;
 }
 
 .header {

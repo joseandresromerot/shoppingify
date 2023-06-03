@@ -8,3 +8,12 @@ export const setItems = (items) => {
     }
   }
 }
+
+export const setActiveShoppingList = (activeShoppingList) => {
+  return {
+    type: Types.SET_ACTIVE_SHOPPING_LIST,
+    payload: {
+      activeShoppingList
+    }
+  }
+}

@@ -49,7 +49,7 @@ const Navbar = () => {
         <IconButton
           icon={faRightFromBracket}
           fontSize={20}
-          buttonClassName={classes.logoutButton}
+          className={classes.logoutButton}
           onClick={handleLogout}
         />
       </ul>

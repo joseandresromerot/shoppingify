@@ -6,3 +6,12 @@
   justify-content: flex-start;
   position: relative;
 }
+
+.children {
+  margin-left: 60px;
+  margin-right: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  flex: 1;
+}

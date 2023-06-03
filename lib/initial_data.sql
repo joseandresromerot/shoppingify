@@ -26,3 +26,23 @@ INSERT INTO item (id, name, note, image_url, category_id) VALUES ('2f01183c-e13d
 INSERT INTO item (id, name, note, image_url, category_id) VALUES ('c8cb7375-42fb-4ef1-aabb-6a4fe9baaa3e', 'Juice', 'Juice is a refreshing and thirst-quenching beverage that comes in a wide variety of flavors. From classic orange juice to exotic blends of tropical fruits, there is a juice for every taste preference. Packed with essential vitamins and minerals, juice provides a convenient way to increase your fruit intake and boost your overall health. Whether you enjoy it as a standalone drink or use it as a base for smoothies and cocktails, juice is a versatile option that can be enjoyed at any time of the day. Its natural sweetness and vibrant colors make it a popular choice among both kids and adults.', 'https://nawon.com.vn/wp-content/uploads/2021/02/2L-Orange-juice-100-juice.jpg', '98c54425-8f1d-4983-84ef-b92476ead907');
 INSERT INTO item (id, name, note, image_url, category_id) VALUES ('3123f275-6f26-42aa-a244-95a29fd7e7b7', 'Soda', 'Soda, also known as carbonated soft drinks, is a popular beverage enjoyed by many. With its fizzy bubbles and wide array of flavors, soda offers a sweet and refreshing experience. From cola to lemon-lime, root beer to ginger ale, there are numerous options to suit different taste preferences. However, it''s important to note that soda is often high in sugar and calories, which can contribute to health issues when consumed in excess. Moderation is key when enjoying soda as an occasional treat or pairing it with a special meal. It''s always a good idea to balance it with plenty of water and healthier beverage choices.', 'https://cdn.shopify.com/s/files/1/0384/6242/3179/products/142_b3feb9f4-5857-4059-92f5-c03e2de15e71_1024x1024@2x.jpg?v=1654534999', '98c54425-8f1d-4983-84ef-b92476ead907');
 INSERT INTO item (id, name, note, image_url, category_id) VALUES ('542004d8-3b6b-4d5f-9b8e-7b906da9f1bb', 'Beer', 'Beer is one of the oldest and most widely consumed alcoholic beverages in the world. Crafted from malted grains, hops, yeast, and water, beer comes in a wide range of styles and flavors. From light and crisp lagers to robust and complex ales, there''s a beer to suit every palate. Beyond its taste, beer has become an integral part of social gatherings and celebrations, often enjoyed responsibly in moderation. It''s important to note that beer contains alcohol and should be consumed responsibly by those of legal drinking age. Whether you''re a beer enthusiast exploring different brews or simply enjoying a cold one with friends, beer offers a diverse and enjoyable drinking experience.', 'https://products1.imgix.drizly.com/ci-bud-light-980728905e40c8af.jpeg?auto=format%2Ccompress&ch=Width%2CDPR&fm=jpg&q=20', '98c54425-8f1d-4983-84ef-b92476ead907');
+
+INSERT INTO shopping_list (id, name, created_on, state, created_by)
+VALUES ('61e62256-bfd7-468d-a00b-b56034f4e047', 'This is a test shopping list', NOW(), 'active', '7304e868-9208-4b8d-9f22-889fdc78e38d');
+
+INSERT INTO shopping_list_item (id, shopping_list_id, item_id, checked, amount)
+VALUES ('7af35eb8-e365-4962-985a-78a5518a5607', '61e62256-bfd7-468d-a00b-b56034f4e047', '96f1e4f2-eeb6-4ba2-8fec-aaed5e6c3f96', false, 1);
+
+INSERT INTO shopping_list_item (id, shopping_list_id, item_id, checked, amount)
+VALUES ('775c7f38-40b8-4454-85c5-afa76dd67f05', '61e62256-bfd7-468d-a00b-b56034f4e047', 'e4fd59d7-4cc0-4896-a8a0-0be57528fc9c', false, 2);
+
+INSERT INTO shopping_list_item (id, shopping_list_id, item_id, checked, amount)
+VALUES ('3aee9392-7351-49ab-8689-139e89ff18c0', '61e62256-bfd7-468d-a00b-b56034f4e047', '542004d8-3b6b-4d5f-9b8e-7b906da9f1bb', false, 3);
+
+INSERT INTO shopping_list_item (id, shopping_list_id, item_id, checked, amount)
+VALUES ('beeff419-0114-4abd-8429-67a30b300d40', '61e62256-bfd7-468d-a00b-b56034f4e047', '3123f275-6f26-42aa-a244-95a29fd7e7b7', false, 2);
+
+INSERT INTO shopping_list_item (id, shopping_list_id, item_id, checked, amount)
+VALUES ('29db7a9c-698f-45ad-b2b0-c8c0650dcbd7', '61e62256-bfd7-468d-a00b-b56034f4e047', 'c8cb7375-42fb-4ef1-aabb-6a4fe9baaa3e',false, 1);
+
+
