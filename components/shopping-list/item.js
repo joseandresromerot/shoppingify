@@ -1,7 +1,7 @@
 import classes from './item.module.css';
 import AmountField from './amount-field';
 import { useDispatch, useSelector } from 'react-redux';
-import { setActiveShoppingList } from '@/store/actions/items';
+import { setActiveShoppingList, setShoppingListDirty } from '@/store/actions/items';
 import Checkbox from '../ui/field/checkbox';
 import { APP_MODES } from '@/store/reducers/itemsReducer';
 
@@ -42,6 +42,7 @@ const ShoppingListItem = ({ id, name, checked, amount, editing, onItemClick }) =
     };
 
     dispatch(setActiveShoppingList(shoppingList));
+    dispatch(setShoppingListDirty(true));
   };
 
   const handleCheckedChange = (value) => {
@@ -73,6 +74,7 @@ const ShoppingListItem = ({ id, name, checked, amount, editing, onItemClick }) =
     const indexToRemove = shoppingList.items.findIndex(i => i.id === id);
     shoppingList.items.splice(indexToRemove, 1);
     dispatch(setActiveShoppingList(shoppingList));
+    dispatch(setShoppingListDirty(true));
   };
 
   return (

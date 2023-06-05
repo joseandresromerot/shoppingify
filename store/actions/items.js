@@ -26,3 +26,12 @@ export const setAppMode = (appMode) => {
     }
   }
 }
+
+export const setShoppingListDirty = (shoppingListDirty) => {
+  return {
+    type: Types.SET_SHOPPING_LIST_DIRTY,
+    payload: {
+      shoppingListDirty
+    }
+  }
+}

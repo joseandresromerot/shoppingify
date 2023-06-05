@@ -4,12 +4,14 @@ import ShoppingListHeader from './header';
 import ShoppingListTitleBar from './title-bar';
 import ShoppingListItems from './items';
 import ShoppingListSaveBar from './save-bar';
+import ShoppingListCompleteBar from './complete-bar';
 import { useDispatch, useSelector } from 'react-redux';
 import { setActiveShoppingList } from '@/store/actions/items';
+import { APP_MODES } from '@/store/reducers/itemsReducer';
 
 const ShoppingList = () => {
   const dispatch = useDispatch();
-  const { activeShoppingList } = useSelector((state) => state.itemsData);
+  const { activeShoppingList, appMode } = useSelector((state) => state.itemsData);
   const items = activeShoppingList?.items || [];
 
   useEffect(() => {
@@ -41,7 +43,11 @@ const ShoppingList = () => {
       <ShoppingListHeader />
       <ShoppingListTitleBar />
       <ShoppingListItems items={items} />
-      <ShoppingListSaveBar />
+      {appMode === APP_MODES.EDIT_SHOPPING_LIST ? (
+        <ShoppingListSaveBar />
+      ) : (
+        <ShoppingListCompleteBar />
+      )}
     </div>
   );
 };
