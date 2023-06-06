@@ -85,10 +85,9 @@ async function handler(req, res) {
       return;
     }
 
-      const activeShoppingList = {
-        ...result.rows[0],
-        editing: false
-      };
+    const activeShoppingList = {
+      ...result.rows[0]
+    };
 
     const itemsResult = await conn.query(
       "SELECT i.id, i.name, c.name as category, sli.checked, sli.amount " +

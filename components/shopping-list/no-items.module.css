@@ -1,0 +1,32 @@
+.container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0px 40px;
+  background-color: #FFF0DE;
+  position: relative;
+}
+
+.imageContainer {
+  height: 150px;
+  width: 150px;
+  position: absolute;
+  bottom: -10px;
+}
+
+.image {
+  object-fit: cover;
+  overflow: visible;
+}
+
+.emptyText {
+  margin: 0;
+  margin-top: -30%;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 25px;
+  color: #34333A;
+}

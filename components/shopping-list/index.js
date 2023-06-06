@@ -6,8 +6,9 @@ import ShoppingListItems from './items';
 import ShoppingListSaveBar from './save-bar';
 import ShoppingListCompleteBar from './complete-bar';
 import { useDispatch, useSelector } from 'react-redux';
-import { setActiveShoppingList } from '@/store/actions/items';
+import { setActiveShoppingList, setAppMode } from '@/store/actions/items';
 import { APP_MODES } from '@/store/reducers/itemsReducer';
+import NoItems from './no-items';
 
 const ShoppingList = () => {
   const dispatch = useDispatch();
@@ -32,9 +33,12 @@ const ShoppingList = () => {
     getActiveShoppingList()
       .then(data => {
         dispatch(setActiveShoppingList(data.shoppingList));
+        if (!data.shoppingList.id) {
+          dispatch(setAppMode(APP_MODES.EDIT_SHOPPING_LIST));
+        }
       })
-      .catch(err => {
-        console.info('err', err);
+      .catch(error => {
+        console.info('err', error);
       });
   }, []);
 
@@ -42,7 +46,12 @@ const ShoppingList = () => {
     <div className={classes.container}>
       <ShoppingListHeader />
       <ShoppingListTitleBar />
-      <ShoppingListItems items={items} />
+      {items.length === 0 ? (
+        <NoItems />
+      ) : (
+        <ShoppingListItems items={items} />
+      )}
+      
       {appMode === APP_MODES.EDIT_SHOPPING_LIST ? (
         <ShoppingListSaveBar />
       ) : (

@@ -4,8 +4,27 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setActiveShoppingList, setShoppingListDirty } from '@/store/actions/items';
 import Checkbox from '../ui/field/checkbox';
 import { APP_MODES } from '@/store/reducers/itemsReducer';
+import { showLoading, hideMessage, showMessage } from '@/store/actions/messages';
 
-const ShoppingListItem = ({ id, name, checked, amount, editing, onItemClick }) => {
+async function updateChecked(shoppingListId, itemId, checked) {
+  const response = await fetch('/api/shopping-list/updatechecked', {
+    method: "POST",
+    body: JSON.stringify({shoppingListId, itemId, checked}),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "Errooooor!");
+  }
+
+  return data;
+}
+
+const ShoppingListItem = ({ id, name, checked, amount, editing }) => {
   const dispatch = useDispatch();
   const { activeShoppingList, appMode } = useSelector((state) => state.itemsData);
 
@@ -45,7 +64,7 @@ const ShoppingListItem = ({ id, name, checked, amount, editing, onItemClick }) =
     dispatch(setShoppingListDirty(true));
   };
 
-  const handleCheckedChange = (value) => {
+  const handleCheckedChange = async (value) => {
     const shoppingList = {
       ...activeShoppingList,
       items: [
@@ -59,7 +78,23 @@ const ShoppingListItem = ({ id, name, checked, amount, editing, onItemClick }) =
       checked: value
     };
 
-    dispatch(setActiveShoppingList(shoppingList));
+    dispatch(showLoading());
+    const result = await updateChecked(shoppingList.id, id, value);
+    dispatch(hideMessage());
+
+    if (result.success === false) {
+      dispatch(showMessage(
+        result.message,
+        "Ok",
+        () => {
+          dispatch(hideMessage());
+        },
+        null,
+        null
+      ));
+    } else {
+      dispatch(setActiveShoppingList(shoppingList));
+    }
   };
 
 
@@ -87,7 +122,7 @@ const ShoppingListItem = ({ id, name, checked, amount, editing, onItemClick }) =
           size={20}
         />
       }
-      <div className={classes.itemName}>{name}</div>
+      <div className={`${classes.itemName} ${checked === true ? classes.crossWord : ""}`}>{name}</div>
       <AmountField
         value={amount}
         onValueChange={handleValueChange}
@@ -99,9 +134,5 @@ const ShoppingListItem = ({ id, name, checked, amount, editing, onItemClick }) =
     </div>
   );
 }
-
-ShoppingListItem.defaultProps = {
-  onItemClick: () => {}
-};
 
 export default ShoppingListItem;

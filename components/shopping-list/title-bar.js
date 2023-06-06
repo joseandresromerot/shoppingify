@@ -13,6 +13,19 @@ const ShoppingListTitleBar = () => {
   const handleEditToggle = () => {
     let newAppMode = APP_MODES.EDIT_SHOPPING_LIST;
     if (appMode === newAppMode) {
+      if (activeShoppingList.items.length === 0) {
+        dispatch(showMessage(
+          "Add items before switching to completing mode",
+          "Ok",
+          () => {
+            dispatch(hideMessage());
+          },
+          null,
+          null
+        ));
+        return;
+      }
+
       newAppMode = APP_MODES.VIEW_SHOPPING_LIST;
 
       const shoppingList = {

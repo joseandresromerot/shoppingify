@@ -12,6 +12,12 @@ export const APP_MODES = {
   VIEW_ITEM: "app_mode/ADD_NEW_ITEM"
 };
 
+export const SHOPPING_LIST_STATES = {
+  ACTIVE: "active",
+  COMPLETED: "completed",
+  CANCELLED: "cancelled"
+};
+
 const initialState = {
   appMode: APP_MODES.VIEW_SHOPPING_LIST,
   items: [],

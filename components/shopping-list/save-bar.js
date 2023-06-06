@@ -102,10 +102,13 @@ const ShoppingListSaveBar = () => {
         placeholder="Enter a name"
         value={name}
         onChange={(e) => setName(e.target.value)}
+        disabled={activeShoppingList.items.length === 0}
+        disabledClassName={classes.fieldDisabled}
       />
       <RoundedButton
         className={classes.save}
         onClick={handleSaveClick}
+        disabled={activeShoppingList.items.length === 0}
       >
         Save
       </RoundedButton>
