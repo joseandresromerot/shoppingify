@@ -1,7 +1,11 @@
 .button {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   width: 100%;
+}
+
+.label {
+  margin-left: 5px;
 }

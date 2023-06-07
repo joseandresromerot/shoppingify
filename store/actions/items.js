@@ -35,3 +35,12 @@ export const setShoppingListDirty = (shoppingListDirty) => {
     }
   }
 }
+
+export const setItemId = (itemId) => {
+  return {
+    type: Types.SET_ITEM_ID,
+    payload: {
+      itemId
+    }
+  }
+}

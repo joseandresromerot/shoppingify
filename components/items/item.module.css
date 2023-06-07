@@ -8,11 +8,19 @@
   box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.05);
   border-radius: 12px;
   width: 200px;
-  padding: 17px;
+  padding: 0px 17px;
+}
+
+.nameContainer {
+  flex: 1;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .itemName {
-  flex: 1;
   font-style: normal;
   font-weight: 600;
   font-size: 16px;

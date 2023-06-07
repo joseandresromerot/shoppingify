@@ -5,4 +5,102 @@
   right: 0;
   top: 0;
   background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 30px 0px 0px 0px;
+}
+
+.backContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  padding: 0px 40px;
+}
+
+.back {
+  width: 55px;
+  color: #F9A109;
+  background: transparent;
+  border: 0;
+}
+
+.data {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  overflow: auto;
+  padding: 0px 40px 0px 40px;
+}
+
+.imageContainer {
+  min-height: 220px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 25px;
+  margin-top: 30px;
+  margin-bottom: 50px;
+}
+
+.label {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  color: #C1C1C4;
+  margin-bottom: 10px;
+}
+
+.itemName {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 30px;
+  color: #000000;
+  margin-bottom: 25px;
+}
+
+.text {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: #000000;
+  margin-bottom: 25px;
+}
+
+.fieldContainer {
+  height: 130px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 40px 20px 40px;
+  background-color: #fff;
+}
+
+.delete {
+  height: 61px;
+  width: 117px;
+  background: transparent;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  color: #34333A;
+
+}
+
+.add {
+  height: 61px;
+  width: 124px;
+  background: #F9A109;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  color: #FFFFFF;
 }

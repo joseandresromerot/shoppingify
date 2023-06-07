@@ -29,24 +29,34 @@ const ShoppingListCompleteBar = () => {
   const { activeShoppingList } = useSelector((state) => state.itemsData);
 
   const handleStateClick = async (state) => {
-    dispatch(showLoading());
-    const result = await updateState(activeShoppingList.id, state);
-    dispatch(hideMessage());
+    dispatch(showMessage(
+      `Are you sure that you want to ${state === "completed" ? "complete" : "cancel"} this list?`,
+      "Yes",
+      async () => {
+        dispatch(showLoading());
+        const result = await updateState(activeShoppingList.id, state);
+        dispatch(hideMessage());
 
-    if (result.success === false) {
-      dispatch(showMessage(
-        result.message,
-        "Ok",
-        () => {
-          dispatch(hideMessage());
-        },
-        null,
-        null
-      ));
-    } else {
-      dispatch(setActiveShoppingList({ items: [] }));
-      dispatch(setAppMode(APP_MODES.EDIT_SHOPPING_LIST));
-    }
+        if (result.success === false) {
+          dispatch(showMessage(
+            result.message,
+            "Ok",
+            () => {
+              dispatch(hideMessage());
+            },
+            null,
+            null
+          ));
+        } else {
+          dispatch(setActiveShoppingList({ items: [] }));
+          dispatch(setAppMode(APP_MODES.EDIT_SHOPPING_LIST));
+        }
+      },
+      "No",
+      () => {
+        dispatch(hideMessage());
+      }
+    ));
   };
 
   return (

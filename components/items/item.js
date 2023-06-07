@@ -2,7 +2,7 @@ import IconButton from "../ui/button/icon-button";
 import classes from './item.module.css';
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { setActiveShoppingList, setShoppingListDirty } from "@/store/actions/items";
+import { setActiveShoppingList, setAppMode, setShoppingListDirty, setItemId } from "@/store/actions/items";
 import { APP_MODES } from "@/store/reducers/itemsReducer";
 import { showMessage, hideMessage } from "@/store/actions/messages";
 
@@ -52,9 +52,16 @@ const Item = ({ id, name, category }) => {
     }
   };
 
+  const handleNameClick = async () => {
+    dispatch(setItemId(id));
+    dispatch(setAppMode(APP_MODES.VIEW_ITEM));
+  };
+
   return (
     <div className={classes.item}>
-      <div className={classes.itemName}>{name}</div>
+      <div className={classes.nameContainer} onClick={handleNameClick}>
+        <span className={classes.itemName}>{name}</span>
+      </div>
       <IconButton className={classes.plus} icon={faPlus} fontSize={18} onClick={handleClick} />
     </div>
   );

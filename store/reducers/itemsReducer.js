@@ -3,6 +3,7 @@ export const Types = {
   SET_ACTIVE_SHOPPING_LIST: "items/SET_ACTIVE_SHOPPING_LIST",
   SET_APP_MODE: "items/SET_APP_MODE",
   SET_SHOPPING_LIST_DIRTY: "items/SET_SHOPPING_LIST_DIRTY",
+  SET_ITEM_ID: "items/SET_ITEM_ID",
 };
 
 export const APP_MODES = {
@@ -22,7 +23,8 @@ const initialState = {
   appMode: APP_MODES.VIEW_SHOPPING_LIST,
   items: [],
   activeShoppingList: null,
-  shoppingListDirty: false
+  shoppingListDirty: false,
+  itemId: null
 };
 
 const itemsReducer = (state = initialState, action) => {
@@ -46,6 +48,11 @@ const itemsReducer = (state = initialState, action) => {
       return {
         ...state,
         shoppingListDirty: action.payload.shoppingListDirty
+      };
+    case Types.SET_ITEM_ID:
+      return {
+        ...state,
+        itemId: action.payload.itemId
       };
 
     default:

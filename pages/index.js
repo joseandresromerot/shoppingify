@@ -7,8 +7,9 @@ import ShadowTextfield from "@/components/ui/field/shadow-textfield";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import Category from "@/components/items/category";
 import { useDispatch, useSelector } from "react-redux";
-import { setItems } from "@/store/actions/items";
+import { setItems, setActiveShoppingList } from "@/store/actions/items";
 import { groupBy } from "@/lib/utils";
+import { APP_MODES } from "@/store/reducers/itemsReducer";
 
 const ItemsPage = () => {
   const dispatch = useDispatch();
@@ -32,13 +33,38 @@ const ItemsPage = () => {
       return data;
     };
 
+    const getActiveShoppingList = async () => {
+      const response = await fetch('/api/shopping-list/active', {
+        method: "GET"
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Errooooor!");
+      }
+
+      return data;
+    };
+
     getItems()
       .then(data => {
         dispatch(setItems(data.items));
       })
       .catch(err => {
         console.info('err', err);
+      });
+
+    getActiveShoppingList()
+      .then(data => {
+        dispatch(setActiveShoppingList(data.shoppingList));
+        if (!data.shoppingList.id) {
+          dispatch(setAppMode(APP_MODES.EDIT_SHOPPING_LIST));
+        }
       })
+      .catch(error => {
+        console.info('err', error);
+      });
   }, []);
 
   return (
