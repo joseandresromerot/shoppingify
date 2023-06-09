@@ -7,7 +7,7 @@ import ShadowTextfield from "@/components/ui/field/shadow-textfield";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import Category from "@/components/items/category";
 import { useDispatch, useSelector } from "react-redux";
-import { setItems, setActiveShoppingList } from "@/store/actions/items";
+import { setItems, setActiveShoppingList, setAppMode } from "@/store/actions/items";
 import { groupBy } from "@/lib/utils";
 import { APP_MODES } from "@/store/reducers/itemsReducer";
 

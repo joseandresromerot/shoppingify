@@ -7,18 +7,18 @@ const quicksand = Quicksand({
   subsets: ['latin'],
 });
 
-const OutlinedTextfield = ({className, ref, containerClassName, disabledClassName, error, ...rest}) => {
+const OutlinedTextArea = ({className, ref, containerClassName, disabledClassName, error, ...rest}) => {
   return (
     <>
       <OutlinedField containerClassName={containerClassName} disabledClassName={disabledClassName} error={error}>
-        <input {...rest} ref={ref} className={`${classes.input} ${quicksand.className} ${className}`} />
+        <textarea {...rest} ref={ref} className={`${classes.input} ${quicksand.className} ${className}`} />
       </OutlinedField>
     </>
   );
 }
 
-OutlinedTextfield.defaultProps = {
+OutlinedTextArea.defaultProps = {
   className: ""
 };
 
-export default OutlinedTextfield;
+export default OutlinedTextArea;

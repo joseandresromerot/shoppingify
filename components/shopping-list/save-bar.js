@@ -33,7 +33,8 @@ async function saveShoppingList(shoppingList) {
 
 const ShoppingListSaveBar = () => {
   const { activeShoppingList } = useSelector((state) => state.itemsData);
-  const shoppingListName = activeShoppingList.name || "";
+  const shoppingListName = activeShoppingList?.name || "";
+  const shoppingListItems = activeShoppingList?.items || [];
   const [name, setName] = useState(shoppingListName);
   const dispatch = useDispatch();
 
@@ -102,13 +103,13 @@ const ShoppingListSaveBar = () => {
         placeholder="Enter a name"
         value={name}
         onChange={(e) => setName(e.target.value)}
-        disabled={activeShoppingList.items.length === 0}
+        disabled={shoppingListItems.length === 0}
         disabledClassName={classes.fieldDisabled}
       />
       <RoundedButton
         className={classes.save}
         onClick={handleSaveClick}
-        disabled={activeShoppingList.items.length === 0}
+        disabled={shoppingListItems.length === 0}
       >
         Save
       </RoundedButton>

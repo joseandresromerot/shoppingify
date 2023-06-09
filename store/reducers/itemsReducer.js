@@ -4,13 +4,14 @@ export const Types = {
   SET_APP_MODE: "items/SET_APP_MODE",
   SET_SHOPPING_LIST_DIRTY: "items/SET_SHOPPING_LIST_DIRTY",
   SET_ITEM_ID: "items/SET_ITEM_ID",
+  SET_CATEGORIES: "items/SET_CATEGORIES",
 };
 
 export const APP_MODES = {
   VIEW_SHOPPING_LIST: "app_mode/VIEW_SHOPPING_LIST",
   EDIT_SHOPPING_LIST: "app_mode/EDIT_SHOPPING_LIST",
   ADD_NEW_ITEM: "app_mode/ADD_NEW_ITEM",
-  VIEW_ITEM: "app_mode/ADD_NEW_ITEM"
+  VIEW_ITEM: "app_mode/VIEW_ITEM"
 };
 
 export const SHOPPING_LIST_STATES = {
@@ -20,11 +21,12 @@ export const SHOPPING_LIST_STATES = {
 };
 
 const initialState = {
-  appMode: APP_MODES.VIEW_SHOPPING_LIST,
+  appMode: APP_MODES.EDIT_SHOPPING_LIST,
   items: [],
   activeShoppingList: null,
   shoppingListDirty: false,
-  itemId: null
+  itemId: null,
+  categories: []
 };
 
 const itemsReducer = (state = initialState, action) => {
@@ -53,6 +55,11 @@ const itemsReducer = (state = initialState, action) => {
       return {
         ...state,
         itemId: action.payload.itemId
+      };
+    case Types.SET_CATEGORIES:
+      return {
+        ...state,
+        categories: action.payload.categories
       };
 
     default:

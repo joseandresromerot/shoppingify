@@ -44,3 +44,12 @@ export const setItemId = (itemId) => {
     }
   }
 }
+
+export const setCategories = (categories) => {
+  return {
+    type: Types.SET_CATEGORIES,
+    payload: {
+      categories
+    }
+  }
+}

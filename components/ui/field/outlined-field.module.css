@@ -1,0 +1,11 @@
+.container {
+  position: relative;
+  border: 2px solid #BDBDBD;
+  border-radius: 12px;
+  background: transparent;
+  height: 60px;;
+}
+
+.error {
+  border: 2px solid #b10000;
+}
