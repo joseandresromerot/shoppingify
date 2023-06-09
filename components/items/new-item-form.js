@@ -6,12 +6,32 @@ import TransparentButton from '../ui/button/transparent-button';
 import RoundedButton from '../ui/button/rounded-button';
 import OutlinedTextArea from '../ui/field/outlined-textarea';
 import CategorySelect from './category-select';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setCategories } from '@/store/actions/items';
+import { showLoading, showMessage, hideMessage } from '@/store/actions/messages';
+
+const addCategory = async (name) => {
+  const response = await fetch('/api/categories', {
+    method: "POST",
+    body: JSON.stringify({ name }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "Errooooor!");
+  }
+
+  return data;
+};
 
 const NewItemForm = () => {
   const dispatch = useDispatch();
+  const [fetchCategories, setFetchCategories] = useState(true);
 
   useEffect(() => {
     const getCategories = async () => {
@@ -35,7 +55,43 @@ const NewItemForm = () => {
       .catch(err => {
         console.info('err', err);
       });
-  }, []);
+  }, [fetchCategories]);
+
+  const handleAddCategory = async (newCategory) => {
+    console.info('newCategory', newCategory);
+    dispatch(showLoading());
+    try {
+      const result = await addCategory(newCategory);
+      let message = "";
+
+      if (result.success === true) {
+        setFetchCategories(!fetchCategories);
+        message = "New category added";
+      } else {
+        message = result.message;
+      }
+
+      dispatch(hideMessage());
+      dispatch(showMessage(
+        message,
+        "Ok",
+        () => {
+          dispatch(hideMessage());
+        },
+        null,
+        null
+      ));
+    } catch (error) {
+      dispatch(hideMessage());
+      dispatch(showMessage(
+        error,
+        "Ok",
+        () => {
+          dispatch(hideMessage());
+        }
+      ));
+    }
+  };
 
   return (
     <div className={classes.container}>
@@ -119,7 +175,7 @@ const NewItemForm = () => {
               onBlur={handleBlur}
               value={values.category_id}
               placeholder="Enter a category"
-              onCreateOption={newOption => console.info('newOption', newOption)}
+              onCreateOption={handleAddCategory}
             />
             
           </div>
