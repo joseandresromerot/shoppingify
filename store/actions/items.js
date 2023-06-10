@@ -53,3 +53,12 @@ export const setCategories = (categories) => {
     }
   }
 }
+
+export const setHistory = (history) => {
+  return {
+    type: Types.SET_HISTORY,
+    payload: {
+      history
+    }
+  }
+}

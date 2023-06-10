@@ -7,7 +7,7 @@ const NoItems = () => {
     <div className={classes.container}>
       <h3 className={classes.emptyText}>No items</h3>
       <div className={classes.imageContainer}>
-        <Image src={emptyImg} className={classes.image} fill />
+        <Image src={emptyImg} className={classes.image} fill alt="No items" />
       </div>
     </div>
   );

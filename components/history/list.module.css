@@ -1,0 +1,60 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: #FFFFFF;
+  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.name {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  color: #000000;
+  flex: 1;
+}
+
+.date {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  color: #C1C1C4;
+  margin-left: 10px;
+}
+
+.state {
+  border: 1px solid #767676;
+  border-radius: 8px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  padding: 4px 7px;
+  margin-left: 25px;
+}
+
+.completed {
+  border-color: #56CCF2;
+  color: #56CCF2;
+}
+
+.cancelled {
+  border-color: #EB5757;
+  color: #EB5757;
+}
+
+.icon {
+  color: #C1C1C4;
+}
+
+.arrow {
+  width: 20px;
+  margin-left: 20px;
+  color: #F9A109;
+  background: transparent;
+  border: 0;
+}

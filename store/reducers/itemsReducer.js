@@ -5,6 +5,7 @@ export const Types = {
   SET_SHOPPING_LIST_DIRTY: "items/SET_SHOPPING_LIST_DIRTY",
   SET_ITEM_ID: "items/SET_ITEM_ID",
   SET_CATEGORIES: "items/SET_CATEGORIES",
+  SET_HISTORY: "items/SET_HISTORY",
 };
 
 export const APP_MODES = {
@@ -26,7 +27,8 @@ const initialState = {
   activeShoppingList: null,
   shoppingListDirty: false,
   itemId: null,
-  categories: []
+  categories: [],
+  history: []
 };
 
 const itemsReducer = (state = initialState, action) => {
@@ -60,6 +62,11 @@ const itemsReducer = (state = initialState, action) => {
       return {
         ...state,
         categories: action.payload.categories
+      };
+    case Types.SET_HISTORY:
+      return {
+        ...state,
+        history: action.payload.history
       };
 
     default:
