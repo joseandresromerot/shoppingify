@@ -1,9 +1,9 @@
 import classes from './outlined-field.module.css';
 
-const OutlinedField = ({children, containerClassName, disabledClassName, error, ...rest}) => {
+const OutlinedField = ({children, containerClassName, disabledClassName, error, disabled}) => {
   return (
     <>
-      <div className={`${classes.container} ${containerClassName} ${rest.disabled === true ? disabledClassName : ""} ${error ? classes.error : ""}`}>
+      <div className={`${classes.container} ${containerClassName} ${disabled === true ? disabledClassName : ""} ${error ? classes.error : ""}`}>
         {children}
       </div>
     </>

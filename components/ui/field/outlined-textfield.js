@@ -10,7 +10,7 @@ const quicksand = Quicksand({
 const OutlinedTextfield = ({className, ref, containerClassName, disabledClassName, error, ...rest}) => {
   return (
     <>
-      <OutlinedField containerClassName={containerClassName} disabledClassName={disabledClassName} error={error}>
+      <OutlinedField containerClassName={containerClassName} disabledClassName={disabledClassName} error={error} disabled={rest.disabled}>
         <input {...rest} ref={ref} className={`${classes.input} ${quicksand.className} ${className}`} />
       </OutlinedField>
     </>

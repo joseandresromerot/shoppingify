@@ -8,13 +8,32 @@ import OutlinedTextArea from '../ui/field/outlined-textarea';
 import CategorySelect from './category-select';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { setCategories } from '@/store/actions/items';
+import { setAppMode, setCategories, setItems } from '@/store/actions/items';
 import { showLoading, showMessage, hideMessage } from '@/store/actions/messages';
+import { APP_MODES } from '@/store/reducers/itemsReducer';
 
 const addCategory = async (name) => {
   const response = await fetch('/api/categories', {
     method: "POST",
     body: JSON.stringify({ name }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "Errooooor!");
+  }
+
+  return data;
+};
+
+const addNewItem = async ({ name, note, image_url, category_id }) => {
+  const response = await fetch('/api/items', {
+    method: "POST",
+    body: JSON.stringify({ name, note, image_url, category_id }),
     headers: {
       'Content-Type': 'application/json'
     }
@@ -109,10 +128,37 @@ const NewItemForm = () => {
           category_id: Yup.string().required("Requerido"),
         })}
         onSubmit={(values, { setSubmitting }) => {
-         setTimeout(() => {
-           alert(JSON.stringify(values, null, 2));
-           setSubmitting(false);
-         }, 400);
+          dispatch(showLoading());
+          addNewItem(values)
+            .then(data => {
+              setSubmitting(false);
+              dispatch(hideMessage());
+              dispatch(setItems(data.items));
+              dispatch(setAppMode(APP_MODES.EDIT_SHOPPING_LIST));
+              dispatch(showMessage(
+                "Item added successfully",
+                "Ok",
+                () => {
+                  dispatch(hideMessage());
+                },
+                null,
+                null
+              ));
+            })
+            .catch(err => {
+              console.info('err', err);
+              setSubmitting(false);
+              dispatch(hideMessage());
+              dispatch(showMessage(
+                err,
+                "Ok",
+                () => {
+                  dispatch(hideMessage());
+                },
+                null,
+                null
+              ));
+            });
         }}
      >
        {({
@@ -181,7 +227,7 @@ const NewItemForm = () => {
           </div>
 
           <div className={classes.toolbar}>
-            <TransparentButton className={classes.cancel} onClick={() => {}}>cancel</TransparentButton>
+            <TransparentButton type="button" className={classes.cancel} onClick={() => dispatch(setAppMode(APP_MODES.EDIT_SHOPPING_LIST))}>cancel</TransparentButton>
             <RoundedButton type="submit" disabled={isSubmitting} className={classes.save}>Save</RoundedButton>
           </div>
         </form>
