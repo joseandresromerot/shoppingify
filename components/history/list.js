@@ -4,8 +4,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar } from '@fortawesome/free-regular-svg-icons';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import IconButton from '../ui/button/icon-button';
+import { useRouter } from 'next/router';
 
 const HistoryList = ({ id, name, finishedOn, state }) => {
+  const router = useRouter();
+  const handleClick = () => {
+    router.push(`/history/${id}`);
+  };
+
   return (
     <div className={classes.container}>
       <div className={classes.name}>{name}</div>
@@ -20,6 +26,7 @@ const HistoryList = ({ id, name, finishedOn, state }) => {
         icon={faChevronRight}
         fontSize={16}
         className={classes.arrow}
+        onClick={handleClick}
       />
     </div>
   );

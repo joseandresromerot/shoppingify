@@ -35,3 +35,28 @@
   border: 0;
   color: #C1C1C4;
 }
+
+.amount {
+  width: 68px;
+  height: 32px;
+  border: 2px solid #F9A109;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  margin: 10px 0px;
+}
+
+.amountText {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 15px;
+  color: #F9A10A;
+}
+
+.noBorder {
+  border: 0;
+}

@@ -1,0 +1,50 @@
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  padding: 30px 60px;
+  gap: 20px;
+}
+
+.backContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0px;
+  width: 50px;
+}
+
+.back {
+  width: 55px;
+  color: #F9A109;
+  background: transparent;
+  border: 0;
+}
+
+.title {
+  margin: 20px 0px 0px 0px;
+}
+
+.dateContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 35px;
+}
+
+.dateIcon {
+  color: #C1C1C4;
+  font-size: 15;
+  margin: 0px 10px 0px 5px;
+}
+
+.date {
+  margin: 0;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  color: #C1C1C4;
+}

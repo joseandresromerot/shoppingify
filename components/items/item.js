@@ -6,7 +6,7 @@ import { setActiveShoppingList, setAppMode, setShoppingListDirty, setItemId } fr
 import { APP_MODES } from "@/store/reducers/itemsReducer";
 import { showMessage, hideMessage } from "@/store/actions/messages";
 
-const Item = ({ id, name, category }) => {
+const Item = ({ id, name, category, readMode, value }) => {
   const dispatch = useDispatch();
   const { activeShoppingList, appMode } = useSelector((state) => state.itemsData);
 
@@ -53,8 +53,10 @@ const Item = ({ id, name, category }) => {
   };
 
   const handleNameClick = async () => {
-    dispatch(setItemId(id));
-    dispatch(setAppMode(APP_MODES.VIEW_ITEM));
+    if (!readMode) {
+      dispatch(setItemId(id));
+      dispatch(setAppMode(APP_MODES.VIEW_ITEM));
+    }
   };
 
   return (
@@ -62,9 +64,20 @@ const Item = ({ id, name, category }) => {
       <div className={classes.nameContainer} onClick={handleNameClick}>
         <span className={classes.itemName}>{name}</span>
       </div>
-      <IconButton className={classes.plus} icon={faPlus} fontSize={18} onClick={handleClick} />
+      {readMode ? (
+        <button className={`${classes.amount} ${readMode ? classes.noBorder : ""}`}>
+          <span className={classes.amountText}>{value} pcs</span>
+        </button>
+      ) : (
+        <IconButton className={classes.plus} icon={faPlus} fontSize={18} onClick={handleClick} />
+      )}
     </div>
   );
 }
+
+Item.defaultProps = {
+  readMode: false,
+  value: 0
+};
 
 export default Item;
