@@ -11,11 +11,15 @@ const ShoppingCart = ({ badgeNumber }) => {
           style={{ fontSize: 20, margin: "auto", color: "#fff" }}
         />
       </div>
-      {badgeNumber &&
+      {badgeNumber > 0 &&
         <div className={classes.badge}>{badgeNumber}</div>
       }
     </div>
   );
-}
+};
+
+ShoppingCart.defaultProps = {
+  badgeNumber: 0
+};
 
 export default ShoppingCart;

@@ -12,6 +12,7 @@ import ShoppingCart from './shopping-cart';
 import IconButton from '../ui/button/icon-button';
 import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
 
 const PAGES = [
   {
@@ -33,6 +34,8 @@ const PAGES = [
 
 const Navbar = () => {
   const router = useRouter();
+  const { activeShoppingList } = useSelector(state => state.itemsData);
+  const badgeNumber = activeShoppingList?.items?.length || 0;
 
   async function handleLogout() {
     await signOut();
@@ -53,7 +56,7 @@ const Navbar = () => {
           onClick={handleLogout}
         />
       </ul>
-      <ShoppingCart badgeNumber={3}/>
+      <ShoppingCart badgeNumber={badgeNumber}/>
     </nav>
   );
 };
