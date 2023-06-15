@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import RootLayout from "@/components/layout";
 import { getSession } from "next-auth/react";
 import { redirectUnauthenticated } from "@/lib/auth";
@@ -10,6 +10,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { setItems, setActiveShoppingList, setAppMode } from "@/store/actions/items";
 import { groupBy } from "@/lib/utils";
 import { APP_MODES } from "@/store/reducers/itemsReducer";
+import { debounce } from "lodash";
+
+const getItemsByKeyword = async (keyword) => {
+  const response = await fetch(`/api/items/search?keyword=${keyword}`, {
+    method: "GET"
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "Errooooor!");
+  }
+
+  return data;
+};
 
 const ItemsPage = () => {
   const dispatch = useDispatch();
@@ -17,6 +32,7 @@ const ItemsPage = () => {
   const { items } = itemsData;
   const itemsByCategory = groupBy(items, "category");
   const categories = Object.keys(itemsByCategory);
+  const [keyword, setKeyword] = useState("");
 
   useEffect(() => {
     const getItems = async () => {
@@ -67,6 +83,24 @@ const ItemsPage = () => {
       });
   }, []);
 
+  const eventHandler = (newKeyword) => {
+    getItemsByKeyword(newKeyword)
+      .then(data => {
+        dispatch(setItems(data.items));
+      })
+      .catch(err => {
+        console.info('err', err);
+      });
+  };
+
+  const debouncedEventHandler = useMemo(() => debounce(eventHandler, 500), []);
+
+  const handleKeywordChange = (e) => {
+    const newKeyword = e.target.value;
+    setKeyword(newKeyword);
+    debouncedEventHandler(newKeyword);
+  };
+
   return (
     <RootLayout>
       <div className={classes.mainContainer}>
@@ -79,6 +113,8 @@ const ItemsPage = () => {
             icon={faMagnifyingGlass}
             iconSize={17}
             placeholder="search item"
+            value={keyword}
+            onChange={handleKeywordChange}
           />
         </div>
         {categories.map(c => (
