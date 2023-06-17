@@ -2,7 +2,7 @@ import IconButton from "../ui/button/icon-button";
 import classes from './item.module.css';
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { setActiveShoppingList, setAppMode, setShoppingListDirty, setItemId } from "@/store/actions/items";
+import { setActiveShoppingList, setAppMode, setShoppingListDirty, setItemId, setSidebarVisible } from "@/store/actions/items";
 import { APP_MODES } from "@/store/reducers/itemsReducer";
 import { showMessage, hideMessage } from "@/store/actions/messages";
 
@@ -56,6 +56,7 @@ const Item = ({ id, name, category, readMode, value }) => {
     if (!readMode) {
       dispatch(setItemId(id));
       dispatch(setAppMode(APP_MODES.VIEW_ITEM));
+      dispatch(setSidebarVisible(true));
     }
   };
 

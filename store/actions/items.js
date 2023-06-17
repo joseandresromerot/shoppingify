@@ -62,3 +62,12 @@ export const setHistory = (history) => {
     }
   }
 }
+
+export const setSidebarVisible = (sidebarVisible) => {
+  return {
+    type: Types.SET_SIDEBAR_VISIBLE,
+    payload: {
+      sidebarVisible
+    }
+  }
+}

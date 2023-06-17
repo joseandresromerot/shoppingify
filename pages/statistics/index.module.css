@@ -24,3 +24,15 @@
   height: 350px;
   width: 100%;
 }
+
+@media only screen and (max-width: 992px) {
+  .mainContainer {
+padding: 10px 20px;
+  }
+
+  .topContainer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 25px;
+  }
+}

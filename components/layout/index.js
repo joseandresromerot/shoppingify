@@ -7,6 +7,7 @@ import ShoppingList from '../shopping-list';
 import NewItemForm from '../items/new-item-form';
 import ItemDetails from '../items/item-details';
 import { APP_MODES } from '@/store/reducers/itemsReducer';
+import { ResponsiveBreakpoints, useMediaQuery } from '@/styles';
 
 const quicksand = Quicksand({
   weight: ['300', '400', '500', '600', '700'],
@@ -21,8 +22,9 @@ const appModesComponents = {
 };
 
 export default function RootLayout({ children }) {
-  const { appMode } = useSelector((state) => state.itemsData);
+  const { appMode, sidebarVisible } = useSelector((state) => state.itemsData);
   const ActiveModeComponent = appModesComponents[appMode];
+  const isAtLeastDesktop = useMediaQuery(`(min-width: ${ResponsiveBreakpoints.DESKTOP}px)`);
 
   return (
     <div className={`${classes.mainContainer} ${quicksand.className}`}>
@@ -30,7 +32,10 @@ export default function RootLayout({ children }) {
       <div className={classes.children}>
         {children}
       </div>
-      <ActiveModeComponent />
+
+      {(sidebarVisible || isAtLeastDesktop) && 
+        <ActiveModeComponent />
+      }
     </div>
   )
 }

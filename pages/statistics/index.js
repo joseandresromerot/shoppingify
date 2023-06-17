@@ -14,11 +14,13 @@ import {
   Legend,
   ResponsiveContainer
 } from 'recharts';
+import { ResponsiveBreakpoints, useMediaQuery } from "@/styles";
 
 const StatisticsPage = () => {
   const [topItems, setTopItems] = useState([]);
   const [topCategories, setTopCategories] = useState([]);
   const [monthlySummary, setMonthlySummary] = useState([]);
+  const isAtLeastDesktop = useMediaQuery(`(min-width: ${ResponsiveBreakpoints.DESKTOP}px)`);
 
   useEffect(() => {
     const getTopItems = async () => {
@@ -87,6 +89,18 @@ const StatisticsPage = () => {
         console.info('err', err);
       });
   }, []);
+
+  const monthlySummaryTrimmed = [...monthlySummary];
+
+  if (!isAtLeastDesktop) {
+    monthlySummaryTrimmed.shift();
+    monthlySummaryTrimmed.shift();
+    monthlySummaryTrimmed.pop();
+    monthlySummaryTrimmed.pop();
+  }
+
+  console.info('monthlySummaryTrimmed', monthlySummaryTrimmed);
+
   return (
     <RootLayout>
       <div className={classes.mainContainer}>
@@ -110,7 +124,7 @@ const StatisticsPage = () => {
             <LineChart
               width={"100%"}
               height={"100%"}
-              data={monthlySummary}
+              data={monthlySummaryTrimmed}
             >
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="name" />

@@ -48,3 +48,9 @@
   line-height: 15px;
   color: #C1C1C4;
 }
+
+@media only screen and (max-width: 992px) {
+  .mainContainer {
+    padding: 20px 10px;
+  }
+}

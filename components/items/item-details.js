@@ -4,7 +4,7 @@ import { faLeftLong } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { showMessage, hideMessage, showLoading } from '@/store/actions/messages';
-import { setItemId, setAppMode, setActiveShoppingList, setShoppingListDirty, setItems } from '@/store/actions/items';
+import { setItemId, setAppMode, setActiveShoppingList, setShoppingListDirty, setItems, setSidebarVisible } from '@/store/actions/items';
 import { APP_MODES } from '@/store/reducers/itemsReducer';
 import TransparentButton from '../ui/button/transparent-button';
 import RoundedButton from '../ui/button/rounded-button';
@@ -80,6 +80,7 @@ const ItemDetails = () => {
   const handleBackClick = () => {
     dispatch(setItemId(null));
     dispatch(setAppMode(APP_MODES.EDIT_SHOPPING_LIST));
+    dispatch(setSidebarVisible(false));
   };
 
   const handleAddToListClick = () => {

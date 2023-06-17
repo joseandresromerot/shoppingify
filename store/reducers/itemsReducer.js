@@ -6,6 +6,7 @@ export const Types = {
   SET_ITEM_ID: "items/SET_ITEM_ID",
   SET_CATEGORIES: "items/SET_CATEGORIES",
   SET_HISTORY: "items/SET_HISTORY",
+  SET_SIDEBAR_VISIBLE: "items/SET_SIDEBAR_VISIBLE",
 };
 
 export const APP_MODES = {
@@ -28,7 +29,8 @@ const initialState = {
   shoppingListDirty: false,
   itemId: null,
   categories: [],
-  history: []
+  history: [],
+  sidebarVisible: false
 };
 
 const itemsReducer = (state = initialState, action) => {
@@ -67,6 +69,11 @@ const itemsReducer = (state = initialState, action) => {
       return {
         ...state,
         history: action.payload.history
+      };
+    case Types.SET_SIDEBAR_VISIBLE:
+      return {
+        ...state,
+        sidebarVisible: action.payload.sidebarVisible
       };
 
     default:

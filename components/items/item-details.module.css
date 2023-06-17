@@ -104,3 +104,10 @@
   line-height: 20px;
   color: #FFFFFF;
 }
+
+@media only screen and (max-width: 992px) {
+  .container {
+    left: 80px;
+    width: auto;
+  }
+}
