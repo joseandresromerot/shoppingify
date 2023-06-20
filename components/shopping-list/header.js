@@ -10,7 +10,7 @@ const ShoppingListHeader = ({ onAddClick }) => {
         <Image src={bottleImg} className={classes.image} fill alt="Add new item" />
       </div>
       <div className={classes.buttonContainer}>
-        <div className={classes.hint}>Didn't find what you need?</div>
+        <div className={classes.hint}>{"Didn't find what you need?"}</div>
         <RoundedButton className={classes.add} onClick={onAddClick}>Add item</RoundedButton>
       </div>
     </div>

@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setItems, setActiveShoppingList, setAppMode } from "@/store/actions/items";
 import { groupBy } from "@/lib/utils";
 import { APP_MODES } from "@/store/reducers/itemsReducer";
-import { debounce } from "lodash";
+import debounce from "lodash/debounce";
 
 const getItemsByKeyword = async (keyword) => {
   const response = await fetch(`/api/items/search?keyword=${keyword}`, {
